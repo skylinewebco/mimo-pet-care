@@ -1,0 +1,189 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --maroon: #91352b;
+  --maroon-deep: #6e261f;
+  --peach: #f8c9b7;
+  --cream: #f9dfc8;
+  --white: #ffffff;
+  --yellow: #fbe07a;
+  --teal: #6aa9b5;
+  --green: #6aaa4b;
+  --gutter: clamp(1rem, 4vw, 3.5rem);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    background: var(--peach);
+  }
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+  body {
+    @apply bg-peach font-body text-maroon antialiased;
+    overflow-x: clip;
+    text-rendering: optimizeLegibility;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display;
+  }
+  ::selection {
+    background: var(--yellow);
+    color: var(--maroon);
+  }
+  :focus-visible {
+    outline: 2.5px solid var(--maroon);
+    outline-offset: 3px;
+    border-radius: 12px;
+  }
+  img {
+    -webkit-user-drag: none;
+  }
+  button {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+@layer components {
+  .gutter {
+    padding-left: var(--gutter);
+    padding-right: var(--gutter);
+  }
+  .container-x {
+    @apply mx-auto w-full max-w-[1440px];
+    padding-left: var(--gutter);
+    padding-right: var(--gutter);
+  }
+  .display-xl {
+    @apply font-display font-bold uppercase leading-[0.88] tracking-[-0.01em];
+    font-size: clamp(2.6rem, 7.4vw, 7.25rem);
+  }
+  .display-lg {
+    @apply font-display font-bold uppercase leading-[0.92];
+    font-size: clamp(2.1rem, 5.2vw, 4.75rem);
+  }
+  .eyebrow {
+    @apply font-body text-[0.72rem] font-bold uppercase tracking-[0.14em];
+  }
+  .card-border {
+    border: 1.5px solid var(--maroon);
+  }
+  .btn-pill {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border-1.5 border-maroon px-6 py-3 font-display text-[0.95rem] font-semibold uppercase tracking-wide transition-[transform,background-color,color,box-shadow] duration-300 will-change-transform;
+  }
+  .btn-solid {
+    @apply btn-pill bg-maroon text-white hover:-translate-y-0.5 hover:shadow-press active:translate-y-0 active:shadow-none;
+  }
+  .btn-ghost {
+    @apply btn-pill bg-transparent text-maroon hover:bg-maroon hover:text-white;
+  }
+  .input {
+    @apply w-full rounded-2xl border-1.5 border-maroon/40 bg-white/70 px-4 py-3.5 font-body text-[0.95rem] text-maroon placeholder:text-maroon/45 transition-colors duration-200 focus:border-maroon focus:bg-white focus:outline-none;
+  }
+  .sr-only-focusable:not(:focus) {
+    @apply sr-only;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .paper-grain {
+    background-image: radial-gradient(rgba(145, 53, 43, 0.06) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+}
+
+/* Custom cursor: hide the native arrow only where the paw cursor is active */
+html.has-paw-cursor,
+html.has-paw-cursor a,
+html.has-paw-cursor button,
+html.has-paw-cursor [role='button'],
+html.has-paw-cursor label {
+  cursor: none;
+}
+html.has-paw-cursor input,
+html.has-paw-cursor textarea,
+html.has-paw-cursor select,
+html.has-paw-cursor iframe {
+  cursor: auto;
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.animate-spin-slow {
+  animation: spin-slow 18s linear infinite;
+}
+@keyframes wa-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  100% {
+    transform: scale(1.7);
+    opacity: 0;
+  }
+}
+.animate-wa-pulse {
+  animation: wa-pulse 2.6s cubic-bezier(0.2, 0.6, 0.3, 1) infinite;
+}
+@keyframes bubble-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -14px, 0);
+  }
+}
+.animate-bubble {
+  animation: bubble-float 6s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Giant hero type: sized so "GROOMING" spans the canvas width */
+.hero-giant {
+  --canvas: calc(min(100vw, 1680px) - 2 * var(--gutter) - 16px);
+  font-size: calc(var(--canvas) * 0.19);
+}
+@media (min-width: 1024px) {
+  .hero-giant {
+    --canvas: calc(min(100vw - 32px, 1680px) - 2 * var(--gutter));
+  }
+}
