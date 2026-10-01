@@ -1,9 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// GitHub Pages serves this repo at https://skylinewebco.github.io/mimo-pet-care/
-const REPO_BASE = '/mimo-pet-care/'
-
 // Dev-only QA helper: with ?qa in the URL, drive requestAnimationFrame from
 // setTimeout so animations still run inside hidden/background preview tabs.
 const qaRafShim = {
@@ -19,8 +16,8 @@ const qaRafShim = {
   ],
 }
 
-export default defineConfig(({ command }) => ({
-  // Local dev stays at "/", production build uses the repo sub-path.
-  base: command === 'build' ? process.env.BASE_PATH || REPO_BASE : '/',
+export default defineConfig({
+  // Served from the custom domain root (mimopetcare.skylinewebx.com).
+  base: '/',
   plugins: [react(), qaRafShim],
-}))
+})
